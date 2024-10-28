@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Создание заявки</title>
+</head>
+<body>
+    <div>
+        <a href="orders.html">Список заявок</a>
+        <a href="create.html">Добавить заявку</a>
+        <a href="update.html">Обновить заявку</a>
+        <a href="stat.html">Статистика</a>
+    </div>
+    <iframe name="clear" style="display: none;"></iframe>
+    <form target="clear" method="post" action="http://localhost:8000/create">
+        <input required type="number" name="number" placeholder="Номер заявки"/>
+        <input required type="text" name="fio" placeholder="ФИО"/>
+        <input required type="tel" pattern="\+7\(\d{3}\)\d{3}-\d{2}-\d{2}" name="phone" placeholder="+7(xxx)xxx-xx-xx"/>
+        <input required type="text" name="wish" placeholder="Пожелания"/>
+        <input required type="text" name="address" placeholder="Адрес"/>
+        <input required type="number" name="apparts" placeholder="Номер аппартаментов"/>
+        <input required type="date" name="startDate" placeholder="Дата заезда"/>
+        <input required type="date" name="endDate" placeholder="Дата выезда"/>
+        <input type="submit" value="Создать" />
+    </form>
+</body>
+</html>

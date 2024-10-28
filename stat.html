@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Статистика</title>
+</head>
+<body>
+    <div>
+        <a href="orders.html">Список заявок</a>
+        <a href="create.html">Добавить заявку</a>
+        <a href="update.html">Обновить заявку</a>
+        <a href="stat.html">Статистика</a>
+    </div>
+    <h3>Количество выполненных заявок: </h3>
+    <p id="comleteCount"></p>
+
+    <h3>Среднее время выполнения: </h3>
+    <p id="averageTimeInDays"></p>
+
+    <h3>Статистика по номерам: </h3>
+    <table>
+        <thead>
+            <th>Номер</th>
+            <th>Количество гостей</th>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+    <script>
+        let completeCount = document.getElementById("comleteCount");
+        let averageTimeInDays = document.getElementById("averageTimeInDays");
+        let stat = document.querySelector("tbody");
+
+        GetStat();
+
+        async function GetStat() {
+            let res = await fetch("http://127.0.0.1:8000/stat");
+            let stats = await res.json();
+
+            completeCount.append(stats.completeCount);
+            averageTimeInDays.append(stats.averageTimeInDays);
+
+            let dict = stats.stat;
+            let keys = Object.keys(dict);
+            
+            keys.forEach(key => {
+                let tr = document.createElement("tr");
+                tr.innerHTML =`
+                    <td>${key}</td>
+                    <td>${dict[key]}</td>
+                `;
+                stat.append(tr);
+            });
+        }
+    </script>
+</body>
+</html>
